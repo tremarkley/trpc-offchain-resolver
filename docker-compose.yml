@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -q -U naming-service@oplabs-local-web.iam -d dapp-console']
+      test: ['CMD-SHELL', 'pg_isready -q -U naming-service@oplabs-local-web.iam -d naming-service']
     volumes:
       - ./setup-local-db.sql:/docker-entrypoint-initdb.d/setup-local-db.sql
     ports:
@@ -27,21 +27,19 @@ services:
 
   api:
     build:
-      context: ../../
+      # context: ../../
       dockerfile: Dockerfile
-      target: naming-service
+      # target: naming-service
     env_file: .env
     environment:
       - REDIS_URL=redis://redis:6379
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_NAME=dapp-console
+      - DB_NAME=naming-service
       - MIGRATE_DB_USER=naming-service@oplabs-local-web.iam
       - DB_USER=naming-service@oplabs-local-web.iam
     healthcheck:
       test: curl http://0.0.0.0:7300/api/v0/healthz
-    volumes:
-      - ../../certs/extra-ca-certificates.crt:/usr/local/share/ca-certificates/extra-ca-certificates.crt
     ports:
       - 7400:7300
     depends_on:
