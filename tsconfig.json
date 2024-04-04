@@ -1,0 +1,27 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "target": "es2021",
+    "lib": ["esnext"],
+    "composite": true,
+    "outDir": "types",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "useUnknownInCatchVariables": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+  }
+}
