@@ -26,7 +26,7 @@ RUN pnpm fetch
 COPY . ./
 
 # install monorepo dependencies, from the virtual store
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --prefer-offline
+RUN pnpm install --frozen-lockfile --prefer-offline
 
 # build all packages/apps
 RUN pnpm build
