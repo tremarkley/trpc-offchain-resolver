@@ -31,6 +31,8 @@ RUN pnpm install --frozen-lockfile --prefer-offline
 # build all packages/apps
 RUN pnpm build
 
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/extra-ca-certificates.crt
+
 EXPOSE 7300
 
 CMD [ "pnpm", "start" ]
