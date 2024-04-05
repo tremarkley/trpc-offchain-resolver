@@ -22,7 +22,9 @@ export type MigrationOptions = {
 const DEFAULT_DATABASE_MIGRATION_FOLDER = 'migrations'
 
 export function connectToDatabase(options: DatabaseOptions): Database {
-  const pool = new Pool({connectionString: options.connectionString, max: options.max })
+  const pool = new Pool({connectionString: options.connectionString, max: options.max, ssl: {
+    rejectUnauthorized: false
+  } })
   return drizzle(pool)
 }
 
@@ -35,7 +37,9 @@ export async function runMigrations(
 ) {
   const { migrationsFolder = DEFAULT_DATABASE_MIGRATION_FOLDER } =
     migrationOptions
-  const migratorPool = new Pool({ connectionString: options.connectionString, max: 1 })
+  const migratorPool = new Pool({ connectionString: options.connectionString, max: 1, ssl: {
+    rejectUnauthorized: false
+  } })
   await migrate(drizzle(migratorPool), {
     migrationsFolder: migrationsFolder,
   })
