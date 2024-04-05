@@ -100,11 +100,12 @@ export class Service {
    */
   public static readonly init = async () => {
     const db = connectToDatabase({
-      user: envVars.DB_USER,
-      password: envVars.DB_PASSWORD,
-      database: envVars.DB_NAME,
-      host: envVars.DB_HOST,
-      port: envVars.DB_PORT,
+      // user: envVars.DB_USER,
+      // password: envVars.DB_PASSWORD,
+      // database: envVars.DB_NAME,
+      // host: envVars.DB_HOST,
+      // port: envVars.DB_PORT,
+      connectionString: envVars.CONNECTION_STRING,
       max: envVars.DB_MAX_CONNECTIONS,
     })
     /**
@@ -144,12 +145,13 @@ export class Service {
       this.logger.info(`naming service using signing address ${address}`)
       const signer = new ethers.utils.SigningKey(envVars.RESOLVER_PRIVATE_KEY)
       const db = connectToDatabase({
-        user: envVars.DB_USER,
-        password: envVars.DB_PASSWORD,
-        database: envVars.DB_NAME,
-        host: envVars.DB_HOST,
-        port: envVars.DB_PORT,
+        // user: envVars.DB_USER,
+        // password: envVars.DB_PASSWORD,
+        // database: envVars.DB_NAME,
+        // host: envVars.DB_HOST,
+        // port: envVars.DB_PORT,
         max: envVars.DB_MAX_CONNECTIONS,
+        connectionString: envVars.CONNECTION_STRING,
       })
 
       const nameDb = new NameDatabaseInterface(db, parseInt('300'))
@@ -263,11 +265,12 @@ export class Service {
         await retryWithBackoff(
           () =>
             runMigrations({
-              user: envVars.MIGRATE_DB_USER,
-              password: envVars.MIGRATE_DB_PASSWORD,
-              database: envVars.DB_NAME,
-              host: envVars.DB_HOST,
-              port: envVars.DB_PORT,
+              // user: envVars.MIGRATE_DB_USER,
+              // password: envVars.MIGRATE_DB_PASSWORD,
+              // database: envVars.DB_NAME,
+              // host: envVars.DB_HOST,
+              // port: envVars.DB_PORT,
+              connectionString: envVars.CONNECTION_STRING,
             }),
           envVars.MIGRATE_MAX_RETRIES,
           envVars.MIGRATE_INITIAL_RETRY_DELAY,

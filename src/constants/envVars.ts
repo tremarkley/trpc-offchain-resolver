@@ -34,6 +34,7 @@ const envVarSchema = z.object({
   DB_PORT: z.number().optional(),
   DB_NAME: z.string().optional(),
   DB_MAX_CONNECTIONS: z.number().int().min(1).optional(),
+  CONNECTION_STRING: z.string(),
 })
 
 const isTest = process.env.NODE_ENV === 'test'
@@ -74,6 +75,7 @@ export const envVars = envVarSchema.parse(
         MIGRATE_INITIAL_RETRY_DELAY: 1,
         MIGRATE_MAX_RETRY_DELAY: 1,
         MIGRATE_MAX_RETRIES: 1,
+        CONNECTION_STRING: 'CONNECTION_STRING',
       }
     : {
         PORT: process.env.PORT
@@ -106,5 +108,6 @@ export const envVars = envVarSchema.parse(
           process.env.MIGRATE_INITIAL_RETRY_DELAY ?? 30000,
         MIGRATE_MAX_RETRY_DELAY: process.env.MIGRATE_MAX_RETRY_DELAY ?? 120000,
         MIGRATE_MAX_RETRIES: process.env.MIGRATE_MAX_RETRIES ?? 3,
+        CONNECTION_STRING: process.env.CONNECTION_STRING,
       },
 )
