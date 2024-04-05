@@ -155,7 +155,7 @@ export class Service {
       })
 
       const nameDb = new NameDatabaseInterface(db, parseInt('300'))
-      // Start building the app.
+      // Start building the app
       const app = makeApp(signer, '/', nameDb)
 
       // Body parsing.
